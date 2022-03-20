@@ -6,6 +6,17 @@ xmlns:th="http://www.thymeleaf.org">
     <title>Title</title>
 </head>
 <body>
+    <div th:fragment="footer">
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span th:text="${'Copyright &copy; key? ' + #dates.format(#dates.createNow(), 'yyyy')} + ' by WolfDev'"></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
     <div th:fragment="all-js-scripts">
         <!-- Bootstrap core JavaScript-->
         <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
