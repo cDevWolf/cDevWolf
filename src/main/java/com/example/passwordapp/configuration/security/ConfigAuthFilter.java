@@ -15,10 +15,11 @@ public class ConfigAuthFilter{
                             try {
                                 authorize
                                         .mvcMatchers("/v1/app").hasRole("ADMIN_ROLE")
-                                        .mvcMatchers("/login", "/css/**",
+                                        .mvcMatchers("/login","/logout","/css/**",
                                                 "/js/**","/scss/**","/img/**").permitAll()
                                         .anyRequest().authenticated()
-                                        .and().formLogin().loginPage("/login");
+                                        .and().formLogin().loginPage("/login").defaultSuccessUrl("/v1/", true)
+                                        .and().logout();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
