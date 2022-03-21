@@ -1,5 +1,9 @@
 package com.example.passwordapp.main.controllers.security;
 
+import com.example.passwordapp.models.entity.KeyList;
+import com.example.passwordapp.models.entity.User;
+import com.example.passwordapp.models.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +15,15 @@ import java.security.Principal;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/login")
     public String loginPage(@RequestParam(required = false)String error,
                             @RequestParam(required = false)String logout,
                             Model model, Principal principal, RedirectAttributes flash){
+
         if(principal != null){
             flash.addAttribute("info", "You've in a curren session");
             return "redirect:/v1/";

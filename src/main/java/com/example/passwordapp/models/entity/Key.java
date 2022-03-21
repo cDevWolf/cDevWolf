@@ -3,31 +3,34 @@ package com.example.passwordapp.models.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
-    private final static long serialVersionUID = 1L;
+@Table(name = "user_keys")
+public class Key implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_user;
+    private long id_key;
+    private String website;
     private String username;
     private String password;
-    private String role;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "keylist_id")
     private KeyList keyList;
 
-    @PrePersist
-    private void setKeYListandSerial(){
-        this.keyList = new KeyList();
+    public long getId_key() {
+        return id_key;
     }
 
-    public long getId_user() {
-        return id_user;
+    public void setId_key(long id_key) {
+        this.id_key = id_key;
     }
 
-    public void setId_user(long id_user) {
-        this.id_user = id_user;
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getUsername() {
@@ -52,13 +55,5 @@ public class User implements Serializable {
 
     public void setKeyList(KeyList keyList) {
         this.keyList = keyList;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }
