@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-@Configuration
+
 public class RegisterAdminUsers {
     private static String encodePassword(String password){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
@@ -17,6 +17,7 @@ public class RegisterAdminUsers {
         return encoder.encode(password);
     }
 
+    /*
     @Bean
     public UserDetailsService users(){
         UserDetails admin = User.builder()
@@ -27,5 +28,5 @@ public class RegisterAdminUsers {
         return new InMemoryUserDetailsManager(admin);
     }
 
-
+    */
 }

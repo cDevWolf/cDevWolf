@@ -13,10 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class ConfigAuthFilter{
-    @Bean
+   /*  @Bean
     SecurityFilterChain web(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests(authorize -> {
@@ -56,6 +56,6 @@ public class ConfigAuthFilter{
         return authenticationProvider;
     }
 
-
+*/
 
 }

@@ -13,6 +13,10 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String role;
+    private String name;
+    private String lastname;
+    private String email;
+
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private KeyList keyList;
@@ -52,6 +56,30 @@ public class User implements Serializable {
 
     public void setKeyList(KeyList keyList) {
         this.keyList = keyList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRole() {
