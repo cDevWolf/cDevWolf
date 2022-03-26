@@ -23,7 +23,7 @@ public class SecurityAuthConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/login","/logout","/css/**",
                         "/js/**","/scss/**","/img/**", "/register").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/v1/", true)
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/v1/app/dashboard", true)
                 .and().logout().permitAll();
     }
 

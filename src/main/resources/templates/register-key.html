@@ -27,29 +27,7 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">All keys</h1>
-
-                <div class="row">
-                    <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Total keys saved</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-key fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
+                <div class="row justify-content-center align-items-center">
                     <div class="col-lg-6">
 
                         <!-- Dropdown Card Example -->
@@ -76,37 +54,43 @@
                             <!-- Card Body -->
                             <div class="card-body">
 
-                                <div class="input-group p-2">
-                                    <span class="input-group-text">Website</span>
-                                    <input class="form-control" type="text" value="somewebsite.com">
-                                </div>
-
-
-                                <div class="input-group p-2">
-                                    <span class="input-group-text">Username</span>
-                                    <input class="form-control bg-light" type="text" value="Value" disabled></input>
-                                </div>
-
-                                <div class="input-group p-2">
-                                    <span class="input-group-text">Password</span>
-                                    <input class="form-control" type="password" value="password">
-                                    <div class="input-group-append align-items-center ui-state-hover">
-                                        <a class="p-2 bg-light" href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                <form method="post" th:action="@{/keys/register-key}" th:object="${key}">
+                                    <div class="input-group p-2">
+                                        <span class="input-group-text">Website</span>
+                                        <input class="form-control" type="text" th:field="*{website}"/>
                                     </div>
-                                </div>
+
+
+                                    <div class="input-group p-2">
+                                        <span class="input-group-text">Username</span>
+                                        <input class="form-control bg-light" type="text" th:field="*{username}"></input>
+                                    </div>
+
+                                    <div class="input-group p-2">
+                                        <span class="input-group-text">Password</span>
+                                        <input class="form-control" type="password" th:field="*{password}"/>
+                                    </div>
+
+                                    <div class="input-group p-2">
+                                        <input type="submit" value="Register key?"/>
+                                    </div>
+                                </form>
+
+
                             </div>
                         </div>
                     </div>
 
                 </div>
 
+            </div>
             <!-- /.container-fluid -->
 
         </div>
         <!-- End of Main Content -->
 
         <!-- Footer -->
-    <div th:replace="fragments/footer/footer :: footer"></div>
+        <div th:replace="fragments/footer/footer :: footer"></div>
         <!-- End of Footer -->
 
     </div>
@@ -140,7 +124,7 @@
     </div>
 </div>
 
-    <div th:replace="fragments/footer/footer :: all-js-scripts"></div>
+<div th:replace="fragments/footer/footer :: all-js-scripts"></div>
 
 </body>
 
