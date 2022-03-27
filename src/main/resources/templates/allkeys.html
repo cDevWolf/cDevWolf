@@ -4,6 +4,7 @@
 
 <head th:replace="fragments/header/header :: header"></head>
 
+
 <body id="page-top">
 
 <!-- Page Wrapper -->
@@ -26,77 +27,45 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">All keys</h1>
-
-                <div class="row">
-                    <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Total keys saved</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-key fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Website</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Show/Hide</th>
+                                    <th>Edit</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Website</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Show/Hide</th>
+                                    <th>Edit</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <tr th:each="key:${allkeys}" class="text-center">
+                                        <td th:text="${key.website}"></td>
+                                        <td th:text="${key.username}"></td>
+                                        <td class="d-flex p-2"><input class="form-control" type="password" th:value="${key.password}" th:id="${key.website+key.username}"></td>
+                                        <td><a class="btn btn-primary" th:attr="onclick=|showValue('${key.website+key.username}')|"><i class="fa fa-eye" th:id="${key.website+key.username+'_eye'}"></i></a></td>
+                                        <td><a class="btn btn-secondary" th:href="@{/keys/register-key}+'?id='+${key.id_key}"><i class="fa fa-edit"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                        <!-- Dropdown Card Example -->
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Key Name Card</h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Options:</div>
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-
-                                <div class="input-group p-2">
-                                    <span class="input-group-text">Website</span>
-                                    <input class="form-control" type="text" value="somewebsite.com">
-                                </div>
-
-
-                                <div class="input-group p-2">
-                                    <span class="input-group-text">Username</span>
-                                    <input class="form-control bg-light" type="text" value="Value" disabled></input>
-                                </div>
-
-                                <div class="input-group p-2">
-                                    <span class="input-group-text">Password</span>
-                                    <input class="form-control" type="password" value="password">
-                                    <div class="input-group-append align-items-center ui-state-hover">
-                                        <a class="p-2 bg-light" href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
 
@@ -139,8 +108,31 @@
         </div>
     </div>
 </div>
-
+</div>
     <div th:replace="fragments/footer/footer :: all-js-scripts"></div>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/datatables-demo.js}"></script>
+
+    <script>
+        function showValue(id){
+            let value = document.getElementById(id);
+            let button = document.getElementById(id+'_eye')
+            if(value.type === "text"){
+                value.type="password";
+                button.classList.remove('fa-eye-slash');
+                button.classList.add('fa-eye');
+            }else{
+                button.classList.remove('fa-eye');
+                button.classList.add('fa-eye-slash');
+                value.type="text";
+            }
+        }
+    </script>
 
 </body>
 

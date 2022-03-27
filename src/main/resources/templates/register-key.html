@@ -55,6 +55,9 @@
                             <div class="card-body">
 
                                 <form method="post" th:action="@{/keys/register-key}" th:object="${key}">
+                                    <div th:if="${key.id_key != null}">
+                                        <input hidden th:field="*{id_key}">
+                                    </div>
                                     <div class="input-group p-2">
                                         <span class="input-group-text">Website</span>
                                         <input class="form-control" type="text" th:field="*{website}"/>
@@ -70,9 +73,8 @@
                                         <span class="input-group-text">Password</span>
                                         <input class="form-control" type="password" th:field="*{password}"/>
                                     </div>
-
-                                    <div class="input-group p-2">
-                                        <input type="submit" value="Register key?"/>
+                                    <div class="input-group p-2 justify-content-center">
+                                        <input class="btn btn-secondary" type="submit" value="Register key?"/>
                                     </div>
                                 </form>
 
