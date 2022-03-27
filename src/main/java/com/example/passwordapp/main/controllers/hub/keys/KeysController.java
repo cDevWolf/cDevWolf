@@ -58,11 +58,13 @@ public class KeysController {
 
 
     @PostMapping("/register-key")
-    private String registerKeyPost(Model model, @Valid Key key, BindingResult result){
-        if(result.hasErrors()){
+    private String registerKeyPost(Model model, @Valid Key key, BindingResult result, @RequestParam String passwordConf){
+        if(result.hasErrors() || !passwordConf.equals(key.getPassword())){
+            model.addAttribute("info_error_password", true);
             model.addAttribute("key", key);
-            return "register-key";
+            return "/register-key";
         }
+
 
         User user = getUserInfo();
         key.setPassword(Base64.encodeBase64String(key.getPassword().getBytes()));
