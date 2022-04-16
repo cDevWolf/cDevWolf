@@ -1,5 +1,6 @@
 package com.example.passwordapp.main.controllers.hub.keys;
 
+import com.example.passwordapp.main.controllers.hub.keys.security.AES256;
 import com.example.passwordapp.models.entity.Item;
 import com.example.passwordapp.models.entity.Key;
 import com.example.passwordapp.models.entity.User;
@@ -40,7 +41,7 @@ public class KeysController {
         List<Key> allkeys = new ArrayList<>();
         allkeys = keyService.getAllKeysByKeyListId(user.getKeyList());
         for (Key key : allkeys){
-            String pass = new String(java.util.Base64.getDecoder().decode(key.getPassword()), StandardCharsets.UTF_8);
+            String pass = AES256.decrypt(key.getPassword());
             key.setPassword(pass);
         }
         model.addAttribute("allkeys", allkeys);
@@ -64,10 +65,8 @@ public class KeysController {
             model.addAttribute("key", key);
             return "/register-key";
         }
-
-
         User user = getUserInfo();
-        key.setPassword(Base64.encodeBase64String(key.getPassword().getBytes()));
+        key.setPassword(AES256.encrypt(key.getPassword()));
         key.setKeyList(user.getKeyList());
         keyService.insertKey(key);
 
